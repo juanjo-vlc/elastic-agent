@@ -7,8 +7,8 @@ set -eo pipefail
 
 # If ELASTICSEARCH_CONFIG if set, preprend the -c parameter to the paramers array
 if [[ -n "$ELASTICSEARCH_CONFIG" ]]; then
-    # Prepend "--config_file=$ELASTICSEARCH_CONFIG" to the arguments array
-    set -- "-c $ELASTICSEARCH_CONFIG" "$@"
+    # Prepend "-c $ELASTICSEARCH_CONFIG" to the arguments array
+    set -- "-c" "$ELASTICSEARCH_CONFIG" "$@"
 fi
 
 # For information on the possible environment variables that can be passed into the container. Run the following
@@ -16,5 +16,7 @@ fi
 #
 # `./elastic-agent container --help`
 #
+
+echo "Running elastic-agent container $@"
 
 exec elastic-agent container "$@"
